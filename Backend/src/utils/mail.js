@@ -3,7 +3,7 @@ import nodemailer from "nodemailer"
 
 const sendEmail = async (options) => {
     const mailGenerator = new Mailgen({
-        theme: "default",
+        theme: "salted",
         product: {
             name: "matribhumi",
             link: "https://taskmanagelink.com"
