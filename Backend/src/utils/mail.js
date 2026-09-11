@@ -13,6 +13,8 @@ const sendEmail = async (options) => {
     const emailTextual = mailGenerator.generatePlaintext(options.mailgenContent)
     const emailHTML = mailGenerator.generate(options.mailgenContent)
 
+
+    // Create a transporter object
     const transporter = nodemailer.createTransport({
         host: process.env.ETHEREAL_SMTP_HOST,
         port: process.env.ETHEREAL_SMTP_PORT,
@@ -22,6 +24,7 @@ const sendEmail = async (options) => {
         }
     })
 
+    // Configure the mailoptions object
     const mail = {
         from: "mail.taskmanager@example.com",
         to: options.email,
@@ -30,6 +33,7 @@ const sendEmail = async (options) => {
         html: emailHTML
     }
 
+    // Send the email (using try catch to handle any errors that may occur during the sending process)
     try {
         await transporter.sendMail(mail)
     } catch (error) {
