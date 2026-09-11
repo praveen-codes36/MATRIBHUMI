@@ -253,12 +253,12 @@ const resendEmailVerification = asyncHandler(async (req, res) => {
         }
     )
 
-    return status(200, json(new ApiResponse(200, {}, "Email has been sent to your email id again")))
+    return res.status(200).json(new ApiResponse(200, {}, "Email has been sent to your email id again"))
 
 })
 
 const resendEmailVerificationAfterLogin = asyncHandler(async (req, res) => {
-    await User.findById(req.user._id)
+    const user = await User.findById(req.user._id)
 
     if (!user) {
         throw new ApiError(404, "User doesn't exist")
@@ -285,7 +285,7 @@ const resendEmailVerificationAfterLogin = asyncHandler(async (req, res) => {
         }
     )
 
-    return status(200, json(new ApiResponse(200, {}, "Email has been sent to your email id again")))
+    return res.status(200).json(new ApiResponse(200, {}, "Email has been sent to your email id again"))
 
 })
 
