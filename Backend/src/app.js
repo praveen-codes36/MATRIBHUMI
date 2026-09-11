@@ -23,3 +23,14 @@ app.use(cors({
 );
 
 //importing routes
+
+import authRouter from "./routes/auth.route.js"
+
+app.use("/api/v1/auth" , authRouter)
+
+app.get("/", (req, res) => {
+    res.send("welcome TO MATRIBHUMI API")
+})
+
+
+export default app

@@ -4,9 +4,7 @@ import { asyncHandler } from "../utils/async-handler.js"
 import { ApiError } from "../utils/api-error.js"
 import { emailVerificationMailgenContent, forgotPasswordMailGenContent, sendEmail } from "../utils/mail.js"
 import jwt from "jsonwebtoken"
-import { validationResult } from "express-validator"
 import crypto from "crypto"
-import nodemailer from "nodemailer";    
 
 
 const generateAccessAndRefreshToken = async (userId) => {
