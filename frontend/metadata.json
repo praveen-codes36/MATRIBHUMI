@@ -1,0 +1,6 @@
+{
+  "name": "National Land Acquisition & Management System",
+  "description": "NLAMS unifies India's land acquisition lifecycle across Central, State, District, Field, and Policy Maker portals into a transparent national platform.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
