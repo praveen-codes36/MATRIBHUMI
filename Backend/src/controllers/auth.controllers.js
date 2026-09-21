@@ -301,19 +301,6 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
         const user = await User.findById(decodedRefreshToken._id)
 
-        /*
-The Client sends the Briefcase: Insomnia sends the incomingRefreshToken to your server.
-
-Unlocking the Briefcase: jwt.verify takes that token and uses your REFRESH_TOKEN_SECRET master key
-to unlock it.
-
-Reading the ID: Once unlocked, jwt.verify looks inside and says, "Ah, I see the _id stored in here!"
-It hands that _id over to your decodedRefreshToken variable.
-
-THEN we talk to the database: It's only on the very next
-line—User.findById(decodedRefreshToken._id)—that your code actually reaches out
-to MongoDB to say, "Hey database, give me the full user profile for this ID".
-        */
         if (!user) {
             throw new ApiError(
                 401, "Invalid refresh token"
