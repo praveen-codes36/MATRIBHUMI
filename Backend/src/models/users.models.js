@@ -1,11 +1,17 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt"
+import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 import crypto from "crypto"
 
 
 const userSchema = new mongoose.Schema(
     {
+        // INTEGRATION_TODO (Person A): assign roles/jurisdiction through trusted admin tooling.
+        // Public registration does not accept these fields; the default has no B access.
+        role: { type: String, enum: ['member', 'CENTRAL_ADMIN', 'STATE_ADMIN', 'DISTRICT_COLLECTOR', 'FIELD_OFFICER', 'POLICY_MAKER'], default: 'member' },
+        state: { type: String, trim: true },
+        district: { type: String, trim: true },
+        project_ids: [{ type: mongoose.Schema.Types.ObjectId }],
         username: {
             type: String,
             required: true,

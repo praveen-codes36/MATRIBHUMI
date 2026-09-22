@@ -4,17 +4,36 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test test/*.test.js",
+    "seed:person-b": "node scripts/seed-person-b.js",
+    "test:unit": "node --test test/validation.test.js",
+    "test:integration": "node --test test/person-b.test.js",
+    "outbox:person-b": "node scripts/dispatch-person-b-outbox.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
-    "jsonwebtoken": "^9.0.3"
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.19.1",
+    "cookie-parser": "^1.4.7",
+    "express-validator": "^7.2.1",
+    "mailgen": "^2.0.32",
+    "nodemailer": "^7.0.10",
+    "zod": "^3.25.76"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "devDependencies": {
+    "mongodb-memory-server": "^10.2.3",
+    "supertest": "^7.1.4"
   }
 }

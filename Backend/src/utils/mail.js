@@ -6,7 +6,8 @@ const sendEmail = async (options) => {
         theme: "salted",
         product: {
             name: "matribhumi",
-            link: "https://taskmanagelink.com"
+            // MOCK_REPLACE: original template URL; configure the real frontend URL.
+            link: process.env.FRONTEND_URL || "http://localhost:5173"
         }
     })
 
@@ -26,7 +27,8 @@ const sendEmail = async (options) => {
 
     // Configure the mailoptions object
     const mail = {
-        from: "mail.taskmanager@example.com",
+        // MOCK_REPLACE: example sender; set MAIL_FROM to your verified sender.
+        from: process.env.MAIL_FROM || "no-reply@example.com",
         to: options.email,
         subject: options.subject,
         text: emailTextual,

@@ -1,0 +1,28 @@
+import mongoose from 'mongoose';
+const { Schema } = mongoose;
+const ref = (model, required=true) => ({ type:Schema.Types.ObjectId, ref:model, required, index:true });
+const str = { type:String, trim:true };
+const docs = [{ type:Schema.Types.ObjectId }];
+const options = { timestamps:true, strict:'throw', optimisticConcurrency:true };
+const history = new Schema({ action:String, from:String, to:String, actor_id:ref('User'), remarks:String, at:{type:Date,default:Date.now} },{_id:false});
+const projectSchema = new Schema({ code:{...str,required:true,unique:true}, name:str, ministry:str, state:str, district:str, acres:Number, budgetCr:Number, description:str, leadOfficer:str, document_ids:docs, created_by:ref('User'), status:{type:String,enum:['DRAFT','DISTRICT_REVIEW','STATE_REVIEW','CENTRAL_REVIEW','APPROVED','REJECTED','ARCHIVED'],default:'DRAFT'}, history:[history], lock_version:{type:Number,default:0} },options);
+projectSchema.index({state:1,district:1,status:1});
+const geoSchema = new Schema({type:{type:String,enum:['Polygon']},coordinates:[[[Number]]]},{_id:false});
+const parcelSchema = new Schema({ project_id:ref('BProject'), surveyNumber:str, village:str, areaAcres:Number, landType:str, geometry:{type:geoSchema,default:undefined}, disputed:{type:Boolean,default:false}, disputeNotes:str, document_ids:docs, possessionStatus:{type:String,default:'NOT_STARTED'} },options);
+parcelSchema.index({project_id:1,village:1,surveyNumber:1},{unique:true});
+parcelSchema.index({geometry:'2dsphere'});
+const familySchema = new Schema({ headOfFamily:str, familyMembersCount:Number, scStStatus:str, livelihoodLoss:str },{strict:'throw'});
+const ownerSchema = new Schema({ project_id:ref('BProject'), parcel_id:ref('BParcel'), name:str, contact:str, aadhaarMasked:str, ownershipShare:Number, families:[familySchema], document_ids:docs },options);
+const notificationSchema = new Schema({project_id:ref('BProject'),reference:{...str,unique:true},kind:str,title:str,body:str,document_ids:docs,publicationDate:Date,publishedAt:Date,publishedBy:ref('User',false),status:{type:String,default:'DRAFT'}},options);
+const possessionSchema = new Schema({project_id:ref('BProject'),parcel_id:{...ref('BParcel'),unique:true},scheduledDate:Date,takenDate:Date,handoverDate:Date,receivingAgency:str,notes:str,document_ids:docs,status:{type:String,default:'SCHEDULED'}},options);
+const rrSchema = new Schema({project_id:ref('BProject'),owner_id:ref('BOwner'),family_id:{type:Schema.Types.ObjectId,required:true,unique:true},entitlement:str,resettlementHouseStatus:str,annuityGranted:Boolean,trainingEnrolled:Boolean,status:str,completedDate:Date,document_ids:docs},options);
+// Durable integration events, not fake delivery acknowledgements. Person A consumes these.
+const outboxSchema = new Schema({project_id:ref('BProject'),aggregate_id:Schema.Types.ObjectId,event:String,actor_id:ref('User'),payload:Schema.Types.Mixed,deliveredAt:Date},options);
+export const Project = mongoose.model('BProject',projectSchema,'b_projects');
+export const Parcel = mongoose.model('BParcel',parcelSchema,'b_parcels');
+export const Owner = mongoose.model('BOwner',ownerSchema,'b_owners');
+export const Notification = mongoose.model('BNotification',notificationSchema,'b_notifications');
+export const Possession = mongoose.model('BPossession',possessionSchema,'b_possessions');
+export const Rehabilitation = mongoose.model('BRehabilitation',rrSchema,'b_rehabilitations');
+export const Outbox = mongoose.model('BOutbox',outboxSchema,'b_outbox');
+export const models = [Project,Parcel,Owner,Notification,Possession,Rehabilitation,Outbox];
