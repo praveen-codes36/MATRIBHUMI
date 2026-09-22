@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const documentSchema = new mongoose.Schema({
     project_id: {
-        type: mongoose.Schema.Types.ObjectId, // Or String if you are using custom string IDs
+        type: mongoose.Schema.Types.ObjectId, 
         required: true,
         index: true
     },
@@ -12,7 +12,7 @@ const documentSchema = new mongoose.Schema({
         enum: ['PROJECT', 'PARCEL', 'AWARD', 'NOTIFICATION', 'POSSESSION', 'OTHER']
     },
     entity_id: {
-        type: String, // ID of the specific parcel, award, etc.
+        type: String, 
         required: true
     },
     document_type: {
@@ -29,11 +29,11 @@ const documentSchema = new mongoose.Schema({
         required: true
     },
     uploaded_by: {
-        type: mongoose.Schema.Types.ObjectId, // ref to User who uploaded it
+        type: mongoose.Schema.Types.ObjectId,
         required: true
     },
     checksum: {
-        type: String, // For tamper detection
+        type: String,
         required: true
     }
 }, { timestamps: { createdAt: 'uploaded_at', updatedAt: true } }); // Maps uploaded_at
