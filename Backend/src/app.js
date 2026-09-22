@@ -25,7 +25,12 @@ app.use(cors({
 //importing routes
 
 import authRouter from "./routes/auth.route.js"
+import masterLocationRouter from "./routes/masterLocation.routes.js"
+import landRateRouter from "./routes/landRateSchedule.routes.js"
 
+//mounting routes
+app.use("/api/v1/master-location", masterLocationRouter)
+app.use("/api/v1/land-rate", landRateRouter)
 app.use("/api/v1/auth" , authRouter)
 
 app.get("/", (req, res) => {
