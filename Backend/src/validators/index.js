@@ -1,6 +1,4 @@
 import { body } from "express-validator"
-import { AvailableUserRole } from "../utils/constants.js"
-import { addMembersToProject } from "../controllers/project.controllers.js"
 
 const userRegisterValidator = () => {
     return [
