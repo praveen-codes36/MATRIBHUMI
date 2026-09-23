@@ -27,7 +27,7 @@ export const getStates = asyncHandler(async (req, res) => {
 
 export const getDistricts = asyncHandler(async (req, res) => {
     const { state_code } = req.params;
-    const districts = await MasterLocation.find({ type: "DISTRICT", parent_code: state_code }).select({
+    const districts = await MasterLocation.find({ type: "DISTRICT", state_code: state_code }).select({
         code: 1,
         name: 1,
         default_area_unit: 1,
@@ -41,7 +41,7 @@ export const getDistricts = asyncHandler(async (req, res) => {
 
 export const getVillages = asyncHandler(async (req, res) => {
     const { district_code } = req.params;
-    const villages = await MasterLocation.find({ type: "VILLAGE", parent_code: district_code }).select({
+    const villages = await MasterLocation.find({ type: "VILLAGE", district_code : district_code }).select({
         code: 1,
         name: 1,
         default_area_unit: 1,

@@ -29,12 +29,23 @@ import masterLocationRouter from "./routes/masterLocation.routes.js"
 import landRateRouter from "./routes/landRateSchedule.routes.js"
 import documentRouter from "./routes/document.routes.js";
 import auditLogRouter from "./routes/auditLog.routes.js";
+import alertRouter from "./routes/alerts.routes.js";
+import integrationRouter from "./routes/integrationLog.routes.js";
+import reportRouter from "./routes/report.routes.js";
+import fieldAppRouter from "./routes/fieldApp.routes.js";
+
+
+
 
 //mounting routes
 app.use("/api/v1/master-location", masterLocationRouter)
 app.use("/api/v1/land-rate", landRateRouter)
 app.use("/api/v1/auth" , authRouter)
+app.use("/api/v1/reports", reportRouter);
+app.use("/api/v1/alerts", alertRouter);
 app.use("/api/v1/documents", documentRouter);
+app.use("/api/v1/integration", integrationRouter);
+app.use("/api/v1/field-app", fieldAppRouter);
 app.use("/api/v1/audit", auditLogRouter);
 
 app.get("/", (req, res) => {

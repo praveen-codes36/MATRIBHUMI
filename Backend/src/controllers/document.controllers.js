@@ -2,15 +2,14 @@ import { Document } from "../models/document.models.js";
 import { ApiResponse } from "../utils/api-response.js";
 import { ApiError } from "../utils/api-error.js";
 import { asyncHandler } from "../utils/async-handler.js";
-import {user} from "../models/users.models.js"
-
+import { User } from "../models/users.models.js";
 /**
  * 1. UPLOAD A DOCUMENT
  * Route: POST /api/v1/documents
  */
 export const uploadDocument = asyncHandler(async (req, res) => {
     const { project_id, entity_type, entity_id, document_type, file_url, checksum } = req.body;
-    const uploaded_by = req.user?._id || "system_dummy_user"; // Replace with actual auth user later
+    const uploaded_by = req.user?._id || "8ede327f98c1a112144249f4"; // Replace with actual auth user later
 
     if (!project_id || !entity_type || !entity_id || !file_url || !checksum) {
         throw new ApiError(400, "Missing required document fields");
