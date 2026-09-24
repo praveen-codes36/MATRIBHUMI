@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node --test test/*.test.js",
+    "seed:person-b": "node scripts/seed-person-b.js",
+    "test:unit": "node --test test/validation.test.js",
+    "test:integration": "node --test test/person-b.test.js",
+    "outbox:person-b": "node scripts/dispatch-person-b-outbox.js"
   },
   "keywords": [],
   "author": "",
@@ -22,9 +27,15 @@
     "jsonwebtoken": "^9.0.3",
     "mailgen": "^2.0.36",
     "mongoose": "^9.10.1",
-    "nodemailer": "^10.0.10"
+    "nodemailer": "^10.0.10",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.14",
+    "mongodb-memory-server": "^10.2.3",
+    "supertest": "^7.1.4"
+  },
+  "engines": {
+    "node": ">=20.19"
   }
 }
