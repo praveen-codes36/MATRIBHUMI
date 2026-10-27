@@ -2,7 +2,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=20,12,24&height=200&section=header&text=MATRIBHUMI&fontSize=64&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=%E0%A4%AE%E0%A4%BE%E0%A4%A4%E0%A5%83%E0%A4%AD%E0%A5%82%E0%A4%AE%E0%A4%BF%20%C2%B7%20Technology%20built%20with%20responsibility&descAlignY=62&descSize=20" width="100%" alt="MATRIBHUMI"/>
 
-<img src="./assets/matribhumi-hero.svg" width="100%" alt="Animated tricolour ribbons around a rotating Ashoka Chakra"/>
+<img src="./matribhumi-hero.svg" width="100%" alt="Animated tricolour ribbons around a rotating Ashoka Chakra"/>
 
 ### *What if technology was built with responsibility?*
 
